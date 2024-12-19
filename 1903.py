@@ -1,3 +1,5 @@
+# this is the new solution, beats 18.92%
+
 class Solution(object):
     def largestOddNumber(self, num):
         """
@@ -25,15 +27,16 @@ class Solution(object):
         oddEndings = ['1', '3', '5', '7', '9']
         total = 0
 
-        for i in (num.count(x) for x in oddEndings):
-            total += i
+        for i in oddEndings:
+            # i think this is faster than counting, since it will return once it has found the first instance of the number
+            if i in num:
+                total += 1
         if total == 0:
             return ""
         
         # base case is when the entire string is the largest odd number
-        largestPossible = int(num)
-        if largestPossible % 2 != 0:
-            return str(largestPossible)
+        if num[-1] in oddEndings:
+            return num
         
         # if base case doesn't return an odd number, set the intial window size which we will decrement with each
         # loop
